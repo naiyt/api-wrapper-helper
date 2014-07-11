@@ -1,5 +1,4 @@
 import unittest
-import requests
 from httmock import all_requests, HTTMock
 from apihelper import Api, UnacceptedMethod
 
