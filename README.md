@@ -3,6 +3,13 @@ api-wrapper-helper
 
 [![Build Status](https://travis-ci.org/naiyt/api-wrapper-helper.svg)](https://travis-ci.org/naiyt/api-wrapper-helper)
 
-A simple Python module to make writing web API wrappers much simpler
+Essentially just a `requests` wrapper used to make creating API wrappers a bit simpler. As is, it doesn't give you that much over just using `requests`, though (and I should probably write it to inherit from requests instead, so that you get access to all of the `requests` methods directly if needed). Adding OAuth support in directly could make things helpful, I think.
 
-Just an idea that popped into my head today. No idea if this will even be of any use over just using `requests`, but I do have a few ideas on how it could make your life quite a bit easier when dealing with web APIs.
+Example:
+
+	from apihelper import Api
+	token = 'Your Github access token'
+	github_api = Api('https://api.github.com', headers= {
+		'Authorization': 'token {}'.format(token)}
+	)
+	print(github_api.get('/user').json())
