@@ -13,3 +13,4 @@ Example:
 		'Authorization': 'token {}'.format(token)}
 	)
 	print(github_api.get('/user').json())
+Test
