@@ -29,35 +29,35 @@ class Api:
     def get(self, route, params={}, pretty=True):
         data = self.client.get(route, params=params, headers=self.headers, verify=self.verify)
         if pretty:
-            data.json = self._prettify(data.json())
+            data.pretty_json = self._prettify(data.json())
         return data
 
     @set_up
     def post(self, route, params={}, pretty=True):
         data = self.client.post(route, params=params, headers=self.headers, verify=self.verify)
         if pretty:
-            data.json = self._prettify(data.json())
+            data.pretty_json = self._prettify(data.json())
         return data
 
     @set_up
     def head(self, route, params={}, pretty=True):
         data = self.client.head(route, params=params, headers=self.headers, verify=self.verify)
         if pretty:
-            data.json = self._prettify(data.json())
+            data.pretty_json = self._prettify(data.json())
         return data
 
     @set_up
     def put(self, route, params={}, pretty=True):
         data = self.client.put(route, params=params, headers=self.headers, verify=self.verify)
         if pretty:
-            data.json = self._prettify(data.json())
+            data.pretty_json = self._prettify(data.json())
         return data
 
     @set_up
     def delete(self, route, params={}, pretty=True):
         data = self.client.delete(route, params=params, headers=self.headers, verify=self.verify)
         if pretty:
-            data.json = self._prettify(data.json())
+            data.pretty_json = self._prettify(data.json())
         return data
 
     def _headers(self, user_headers, user_agent):
