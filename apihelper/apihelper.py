@@ -16,31 +16,33 @@ class Api:
     def __init__(self,
                  base_url,
                  headers=None,
-                 user_agent=None):
+                 user_agent=None,
+                 verify=True):
         self.base_url = base_url
         self.headers = self._headers(headers, user_agent)
+        self.verify = verify
         self.client = requests
         self._version = __version__
 
     @set_up
     def get(self, route, params={}):
-        return self.client.get(route, params=params, headers=self.headers)
+        return self.client.get(route, params=params, headers=self.headers, verify=self.verify)
 
     @set_up
     def post(self, route, params={}):
-        return self.client.post(route, params=params, headers=self.headers)
+        return self.client.post(route, params=params, headers=self.headers, verify=self.verify)
 
     @set_up
     def head(self, route, params={}):
-        return self.client.head(route, params=params, headers=self.headers)
+        return self.client.head(route, params=params, headers=self.headers, verify=self.verify)
 
     @set_up
     def put(self, route, params={}):
-        return self.client.put(route, params=params, headers=self.headers)
+        return self.client.put(route, params=params, headers=self.headers, verify=self.verify)
 
     @set_up
     def delete(self, route, params={}):
-        return self.client.delete(route, params=params, headers=self.headers)
+        return self.client.delete(route, params=params, headers=self.headers, verify=self.verify)
 
     def _headers(self, user_headers, user_agent):
         if user_agent is None:
