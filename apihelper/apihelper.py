@@ -34,7 +34,7 @@ class Api:
 
     @set_up
     def post(self, route, params={}, pretty=True):
-        data = self.client.post(route, params=params, headers=self.headers, verify=self.verify)
+        data = self.client.post(route, data=params, headers=self.headers, verify=self.verify)
         if pretty:
             data.pretty_json = self._prettify(data.json())
         return data
@@ -48,14 +48,14 @@ class Api:
 
     @set_up
     def put(self, route, params={}, pretty=True):
-        data = self.client.put(route, params=params, headers=self.headers, verify=self.verify)
+        data = self.client.put(route, data=params, headers=self.headers, verify=self.verify)
         if pretty:
             data.pretty_json = self._prettify(data.json())
         return data
 
     @set_up
     def delete(self, route, params={}, pretty=True):
-        data = self.client.delete(route, params=params, headers=self.headers, verify=self.verify)
+        data = self.client.delete(route, data=params, headers=self.headers, verify=self.verify)
         if pretty:
             data.pretty_json = self._prettify(data.json())
         return data
