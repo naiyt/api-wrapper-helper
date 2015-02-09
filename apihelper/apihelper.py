@@ -1,5 +1,6 @@
 # from urllib import request, error, parse
 import requests
+import json
 from functools import wraps
 
 __version__ = "0.02"
@@ -25,24 +26,39 @@ class Api:
         self._version = __version__
 
     @set_up
-    def get(self, route, params={}):
-        return self.client.get(route, params=params, headers=self.headers, verify=self.verify)
+    def get(self, route, params={}, pretty=True):
+        data = self.client.get(route, params=params, headers=self.headers, verify=self.verify)
+        if pretty:
+            data.json = self._prettify(data.json())
+        return data
 
     @set_up
-    def post(self, route, params={}):
-        return self.client.post(route, params=params, headers=self.headers, verify=self.verify)
+    def post(self, route, params={}, pretty=True):
+        data = self.client.post(route, params=params, headers=self.headers, verify=self.verify)
+        if pretty:
+            data.json = self._prettify(data.json())
+        return data
 
     @set_up
-    def head(self, route, params={}):
-        return self.client.head(route, params=params, headers=self.headers, verify=self.verify)
+    def head(self, route, params={}, pretty=True):
+        data = self.client.head(route, params=params, headers=self.headers, verify=self.verify)
+        if pretty:
+            data.json = self._prettify(data.json())
+        return data
 
     @set_up
-    def put(self, route, params={}):
-        return self.client.put(route, params=params, headers=self.headers, verify=self.verify)
+    def put(self, route, params={}, pretty=True):
+        data = self.client.put(route, params=params, headers=self.headers, verify=self.verify)
+        if pretty:
+            data.json = self._prettify(data.json())
+        return data
 
     @set_up
-    def delete(self, route, params={}):
-        return self.client.delete(route, params=params, headers=self.headers, verify=self.verify)
+    def delete(self, route, params={}, pretty=True):
+        data = self.client.delete(route, params=params, headers=self.headers, verify=self.verify)
+        if pretty:
+            data.json = self._prettify(data.json())
+        return data
 
     def _headers(self, user_headers, user_agent):
         if user_agent is None:
@@ -52,3 +68,6 @@ class Api:
         headers =  {'User-Agent': user_agent,
                     'ACCEPT': 'application/json'}
         return dict(headers, **user_headers)
+
+    def _prettify(self, data):
+        return json.dumps(data, sort_keys=True, indent=4, separators=(',', ': '))
